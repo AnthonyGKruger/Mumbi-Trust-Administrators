@@ -77,7 +77,7 @@ const Services = () => {
 	return (
 		<>
 			<Heading content="Services" />
-			<div className="mx-7 mt-10 grid  grid-cols-1 gap-x-8 gap-y-16   sm:mt-16  lg:mx-7 lg:max-w-none lg:grid-cols-3">
+			<div className="mx-7 mt-10 grid  grid-cols-1 gap-x-8 gap-y-16  md:mx-14  sm:mt-16  lg:mx-7 lg:max-w-none lg:grid-cols-3">
 				{mappedServices}
 			</div>
 		</>

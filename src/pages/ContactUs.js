@@ -2,11 +2,19 @@ import Heading from "@/components/UI/Heading";
 import { Checkbox, TextInput, Label, Button, Textarea } from "flowbite-react";
 
 const ContactUs = () => {
+
+	const onSubmitHandler = (event) => {
+		event.preventDefault();
+		console.log('handler')
+		// get validation functions working/ get new template working for emails/ get styling right/
+	}
+	
+
 	return (
 		<>
 			<Heading content="Contact Us" />
 			<div className="mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16">
-				<form className="flex flex-col gap-4">
+				<form className="flex flex-col gap-4" onSubmit={onSubmitHandler}>
 					<div>
 						<div className="mb-2 block">
 							<Label htmlFor="name" value="Your name:" />
@@ -22,7 +30,10 @@ const ContactUs = () => {
 					</div>
 
 					<div className="mb-2 block">
-						<Label htmlFor="comment" value="Let us know how we can assist you:" />
+						<Label
+							htmlFor="comment"
+							value="Let us know how we can assist you:"
+						/>
 					</div>
 					<Textarea
 						id="comment"
@@ -32,7 +43,7 @@ const ContactUs = () => {
 					/>
 
 					<div className="flex items-center gap-2">
-						<Checkbox id="agree" required/>
+						<Checkbox id="agree" required />
 						<Label htmlFor="agree">
 							I agree with the{" "}
 							<a
@@ -44,7 +55,12 @@ const ContactUs = () => {
 						</Label>
 					</div>
 
-					<Button className="bg-lime-400 hover:bg-lime-600 text-amber-800 hover:text-amber-400" type="submit">Register new account</Button>
+					<Button
+						className="bg-lime-400 hover:bg-lime-600 text-amber-800 hover:text-amber-400 w-3/5 mx-auto"
+						type="submit"
+					>
+						Send
+					</Button>
 				</form>
 			</div>
 		</>
