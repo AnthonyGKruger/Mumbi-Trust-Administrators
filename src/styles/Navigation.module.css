@@ -1,0 +1,16 @@
+@media only screen and (min-width: 770px) {
+	.mobileNav {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.defaultNav {
+		display: none;
+	}
+}
+
+#__next > header > div > div.w-4\/5 > div > div:nth-child(1) > button > span > svg.ml-2.h-4.w-4{
+	display: none !important;
+}
+

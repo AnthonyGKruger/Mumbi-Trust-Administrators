@@ -1,5 +1,17 @@
-import '@/styles/globals.css'
+import Navigation from "@/components/UI/Navigation";
+import "@/styles/globals.css";
+import Head from "next/head";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }) => {
+	return (
+		<>
+			<Head>
+				<title>MTA</title>
+			</Head>
+			<Navigation />
+			<Component {...pageProps} />
+		</>
+	);
+};
+
+export default App;
