@@ -1,6 +1,7 @@
 import Navigation from "@/components/UI/Navigation";
 import "@/styles/globals.css";
 import Head from "next/head";
+import {Analytics} from "@vercel/analytics"
 
 const App = ({ Component, pageProps }) => {
 	return (
@@ -10,6 +11,7 @@ const App = ({ Component, pageProps }) => {
 			</Head>
 			<Navigation />
 			<Component {...pageProps} />
+			<Analytics/>
 		</>
 	);
 };
