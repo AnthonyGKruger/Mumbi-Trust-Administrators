@@ -1,5 +1,6 @@
 import { Carousel } from "flowbite-react";
 import Image from "next/image";
+import Link from "next/link";
 import carouselImage1 from "@/media/images/carousel-image-1.jpg";
 import carouselImage2 from "@/media/images/carousel-image-2.jpg";
 import carouselImage3 from "@/media/images/carousel-image-3.jpg";
@@ -21,7 +22,7 @@ const CallToAction = () => {
 			<div className={bannerClasses}>
 				{/* <p className={companyNameClasses}>Mumbi Trust Administrators</p> */}
 				<p className={companySloganClasses}>Build a Legacy. Touch Freedom</p>
-				<button className={buttonClasses}>View Our Services</button>
+				<button className={buttonClasses}><Link href="/Services">View Our Services</Link></button>
 			</div>
 
 			<Carousel>
