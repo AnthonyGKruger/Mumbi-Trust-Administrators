@@ -6,7 +6,9 @@ import {
 	Button,
 	Textarea,
 	Spinner,
+	Toast,
 } from "flowbite-react";
+import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import classes from "@/styles/ContactMe.module.css";
@@ -20,6 +22,9 @@ const ContactUs = () => {
 		nameHasError: false,
 		emailHasError: false,
 		messageHasError: false,
+		formHasError: false,
+		emailSent: false,
+		emailError: false,
 	});
 
 	const formRef = useRef();
@@ -47,59 +52,60 @@ const ContactUs = () => {
 	};
 
 	const changeHandler = (event) => {
-		console.log(event);
-
+		setState({ emailSent: false });
 		if (event.target.name === "name") {
-			setState({ nameHasError: false });
+			setState({ nameHasError: false, formHasError: false });
 			if (validateName(event.target.value)) {
 				setState({ name: event.target.value });
 			} else {
 				setState({ nameHasError: true });
 			}
 		} else if (event.target.name === "email") {
-			setState({ emailHasError: false });
-
+			setState({ emailHasError: false, formHasError: false });
 			if (validateEmail(event.target.value)) {
 				setState({ email: event.target.value });
 			} else {
-				setTimeout(() => {
-					setState({ emailHasError: true });
-				}, 3000);
+				setState({ emailHasError: true });
 			}
 		} else if (event.target.name === "message") {
-			setState({ messageHasError: false });
+			setState({ messageHasError: false, formHasError: false });
 			if (validateString(event.target.value)) {
 				setState({ message: event.target.value });
 			} else {
 				setState({ messageHasError: true });
 			}
 		}
-
-		console.log(formState);
 	};
 
 	const onSubmitHandler = (event) => {
 		event.preventDefault();
 
-		setFormState((prevState) => {
-			return { ...prevState, isSending: true };
-		});
-
-		// emailjs
-		// 	.sendForm(
-		// 		"mumbi_smtp_service",
-		// 		"mumbi_contact_me",
-		// 		formRef.current,
-		// 		process.env.NEXT_PUBLIC_EMAIL_JS_SECURE_TOKEN
-		// 	)
-		// 	.then(
-		// 		(result) => {
-		// 			console.log(result.text);
-		// 		},
-		// 		(error) => {
-		// 			console.log(error.text);
-		// 		}
-		// 	);
+		if (
+			formState.nameHasError ||
+			formState.emailHasError ||
+			formState.messageHasError
+		) {
+			setState({ formHasError: true });
+		} else {
+			setState({ emailError: false, isSending: true });
+			emailjs
+				.sendForm(
+					"mumbi_smtp_service",
+					"mumbi_contact_me",
+					formRef.current,
+					process.env.NEXT_PUBLIC_EMAIL_JS_SECURE_TOKEN
+				)
+				.then(
+					(result) => {
+						console.log(result.text);
+						setState({ emailSent: true, isSending: false });
+					},
+					(error) => {
+						console.log(error.text);
+						setState({ emailError: true, isSending: false });
+					}
+				);
+		}
 	};
 
 	const inputClasses = `${classes.input} focus:ring-lime-400 focus-within:bg-amber-50 focus-visible:border-transparent focus:outline-lime-400`;
@@ -121,8 +127,69 @@ const ContactUs = () => {
 		},
 	};
 
+	const errorToastTheme = {
+		root: {
+			base: "flex float-right w-full max-w-sm items-center rounded-lg bg-white border-2 border-red-400 p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400 duration-300",
+		},
+	};
+
+	const toastTheme = {
+		root: {
+			base: "flex float-right w-full max-w-sm items-center rounded-lg bg-white border-2 border-lime-400 p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400 duration-300",
+		},
+	};
+
 	return (
 		<>
+			<div className="float-right w-96 sticky top-3 right-5 z-40">
+				<div className="flex absolute flex-col gap-4 items-end max-w-full">
+					{formState.emailHasError && (
+						<Toast theme={errorToastTheme}>
+							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
+								<HiExclamation className="h-5 w-5" />
+							</div>
+							<div className="ml-3 text-sm font-normal">
+								Please ensure that you have entered a valid email address.
+							</div>
+							<Toast.Toggle />
+						</Toast>
+					)}
+					{formState.nameHasError && (
+						<Toast theme={errorToastTheme}>
+							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
+								<HiExclamation className="h-5 w-5" />
+							</div>
+							<div className="ml-3 text-sm font-normal">
+								Please ensure that you have entered a valid name.
+							</div>
+							<Toast.Toggle />
+						</Toast>
+					)}
+					{formState.formHasError && (
+						<Toast theme={errorToastTheme}>
+							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
+								<HiX className="h-5 w-5" />
+							</div>
+							<div className="ml-3 text-sm font-normal">
+								There is an issue with the values entered on the form!
+							</div>
+							<Toast.Toggle />
+						</Toast>
+					)}
+					{formState.emailSent && (
+						<Toast theme={toastTheme}>
+							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-lime-100 text-lime-500 dark:bg-lime-700 dark:text-lime-200">
+								<HiCheck className="h-5 w-5" />
+							</div>
+							<div className="ml-3 text-sm font-normal">
+								Form submitted successfully!
+							</div>
+							<Toast.Toggle />
+						</Toast>
+					)}
+				</div>
+			</div>
+
 			<Heading content="Contact Us" />
 			<div className="mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16">
 				<form
@@ -144,6 +211,7 @@ const ContactUs = () => {
 								formState.nameHasError ? errorTextInputTheme : textInputTheme
 							}
 							onChange={changeHandler}
+							// value={formState.name}
 						/>
 					</div>
 
@@ -161,6 +229,7 @@ const ContactUs = () => {
 								formState.emailHasError ? errorTextInputTheme : textInputTheme
 							}
 							onChange={changeHandler}
+							// value={formState.email}
 						/>
 					</div>
 
@@ -180,6 +249,7 @@ const ContactUs = () => {
 							formState.messageHasError ? errorInputClasses : inputClasses
 						}
 						onChange={changeHandler}
+						// value={formState.message}
 					/>
 
 					<div className="flex items-center gap-2">

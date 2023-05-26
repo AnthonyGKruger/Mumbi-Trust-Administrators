@@ -32,6 +32,7 @@ const CallToAction = () => {
 					height={100}
 					alt="Property"
 					unoptimized
+					priority
 				/>
 
 				<Image
@@ -40,6 +41,7 @@ const CallToAction = () => {
 					height={100}
 					alt="Family"
 					unoptimized
+					priority
 				/>
 
 				<Image
@@ -48,6 +50,7 @@ const CallToAction = () => {
 					height={100}
 					alt="Cars"
 					unoptimized
+					priority
 				/>
 
 				<Image
@@ -56,6 +59,7 @@ const CallToAction = () => {
 					height={100}
 					alt="financial wellness"
 					unoptimized
+					priority
 				/>
 			</Carousel>
 		</div>
