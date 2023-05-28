@@ -11,7 +11,7 @@ const Navigation = () => {
 	const linkClasses = `active:border-b active:border-lime-400 hover:border-b hover:border-amber-500 md:hover:text-lime-600 transition-all ease-in-out delay-75`;
 
 	return (
-		<Navbar fluid={true} rounded={true}>
+		<Navbar fluid={true} rounded={true} className={"shadow"}>
 			<Navbar.Brand href="/">
 				<img
 					src="/media/images/MTA_Logo.png"
@@ -28,7 +28,7 @@ const Navigation = () => {
 				>
 					Home
 				</Navbar.Link>
-				<Navbar.Link className={linkClasses} href="/Services">
+				<Navbar.Link className={linkClasses} href="/services">
 					Services
 				</Navbar.Link>
 				<Navbar.Link className={linkClasses} href="/About">

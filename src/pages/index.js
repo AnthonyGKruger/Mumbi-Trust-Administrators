@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import CallToAction from '@/components/UI/CallToAction'
-import Services from '@/pages/Services'
+import Services from '@/pages/services'
 import About from '@/pages/About'
 import Map from '@/components/UI/Map'
 import MoreOnTrusts from '@/components/UI/MoreOnTrusts'

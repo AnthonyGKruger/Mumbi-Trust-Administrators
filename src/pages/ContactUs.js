@@ -139,6 +139,13 @@ const ContactUs = () => {
 		},
 	};
 
+	const checkBoxTheme = {
+		root:{
+			// base: `ring-amber-400 bg-lime-400 accent-lime-200 rounded`
+			base: "h-4 w-4 rounded border border-gray-300 bg-gray-100 focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-amber-600 focus:ring-amber-400 selection:bg-lime-400 accent-lime-200"
+		}
+	}
+
 	return (
 		<>
 			<div className="float-right w-96 sticky top-3 right-5 z-40">
@@ -256,7 +263,8 @@ const ContactUs = () => {
 						<Checkbox
 							id="agree"
 							required
-							className={`focus:ring-amber-400 selection:bg-lime-400`}
+							// className={`focus:ring-amber-400 selection:bg-lime-400 accent-lime-200`}
+							theme={checkBoxTheme}
 						/>
 						<Label htmlFor="agree">
 							I agree with the{" "}
