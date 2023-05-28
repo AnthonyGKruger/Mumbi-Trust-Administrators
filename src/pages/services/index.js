@@ -7,7 +7,7 @@ const Services = () => {
 	const [mappedServices, setMappedServices] = useState();
 
 	const imgTheme = {
-		img: { base: "lg:h-52 lg:object-contain" },
+		img: { base: "lg:h-52 lg:object-cover" },
 	};
 
 	const fetchServiceData = async () => {
