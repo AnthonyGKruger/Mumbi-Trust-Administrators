@@ -9,6 +9,8 @@ const App = ({ Component, pageProps }) => {
 		<>
 			<Head>
 				<title>MTA</title>
+				<meta name="description" content="MTA" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<Navigation />
 			<Component {...pageProps} />
