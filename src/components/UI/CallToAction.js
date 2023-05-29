@@ -1,10 +1,10 @@
 import { Carousel } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
-import carouselImage1 from "@/media/images/carousel-image-1.jpg";
-import carouselImage2 from "@/media/images/carousel-image-2.jpg";
-import carouselImage3 from "@/media/images/carousel-image-3.jpg";
-import carouselImage4 from "@/media/images/carousel-image-4.jpg";
+// import carouselImage1 from "/media/images/carousel-image-1.webp";
+// import carouselImage2 from "/media/images/carousel-image-2.webp";
+// import carouselImage3 from "/media/images/carousel-image-3.webp";
+// import carouselImage4 from "/media/images/carousel-image-4.webp";
 import classes from "@/styles/CallToAction.module.css";
 
 const CallToAction = () => {
@@ -20,14 +20,13 @@ const CallToAction = () => {
 		<div className={containerClasses}>
 			
 			<div className={bannerClasses}>
-				{/* <p className={companyNameClasses}>Mumbi Trust Administrators</p> */}
 				<p className={companySloganClasses}>Build a Legacy. Touch Freedom</p>
 				<button className={buttonClasses}><Link href="/Services">View Our Services</Link></button>
 			</div>
 
 			<Carousel>
 				<Image
-					src={carouselImage1}
+					src={"/media/images/carousel-image-1.webp"}
 					width={100}
 					height={100}
 					alt="Property"
@@ -36,7 +35,7 @@ const CallToAction = () => {
 				/>
 
 				<Image
-					src={carouselImage2}
+					src={"/media/images/carousel-image-2.webp"}
 					width={100}
 					height={100}
 					alt="Family"
@@ -45,7 +44,7 @@ const CallToAction = () => {
 				/>
 
 				<Image
-					src={carouselImage3}
+					src={"/media/images/carousel-image-3.webp"}
 					width={100}
 					height={100}
 					alt="Cars"
@@ -54,7 +53,7 @@ const CallToAction = () => {
 				/>
 
 				<Image
-					src={carouselImage4}
+					src={"/media/images/carousel-image-4.webp"}
 					width={100}
 					height={100}
 					alt="financial wellness"

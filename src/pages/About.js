@@ -14,7 +14,7 @@ const About = () => {
 				{/* <div className={`${classes.card} mx-7 mt-10 sm:mt-16 xl:mx-72 lg:mx-52 md:mx-16`}> */}
 				<Card
 					// horizontal={true}
-					imgSrc="/media/images/MTA_Logo.png"
+					imgSrc="/media/images/MTA_Logo.webp"
 					theme={imgTheme}
 				>
 					<h5 className="text-2xl font-bold tracking-tight text-amber-900 dark:text-white text-center">

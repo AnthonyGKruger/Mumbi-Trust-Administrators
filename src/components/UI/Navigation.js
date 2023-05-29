@@ -1,8 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-// import logo from "@/media/images/MTA_Logo.png";
-import MobileNav from "@/components/UI/MobileNav";
-import classes from "@/styles/Navigation.module.css";
+
 import { Navbar } from "flowbite-react";
 
 const Navigation = () => {
@@ -14,7 +10,7 @@ const Navigation = () => {
 		<Navbar fluid={true} rounded={true} className={"shadow"}>
 			<Navbar.Brand href="/">
 				<img
-					src="/media/images/MTA_Logo.png"
+					src="/media/images/MTA_Logo.webp"
 					className="mr-3 h-20"
 					alt="MTA Logo"
 				/>

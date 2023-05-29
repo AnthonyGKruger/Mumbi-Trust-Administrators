@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import {Analytics} from "@vercel/analytics/react"
 import Footer from "@/components/UI/SiteFooter";
-import Services from "./services";
+// import Services from "./services";
 // import { useRouter } from "next/router";
 
 const App = ({ Component, pageProps }) => {

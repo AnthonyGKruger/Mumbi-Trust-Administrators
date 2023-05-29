@@ -4,7 +4,7 @@ export default function handler(req, res) {
 			id: "s1",
 			title: "Trust Formation",
 			link: "/services/s1",
-			image: "/media/images/Trust-formation.jpg",
+			image: "/media/images/Trust-formation.webp",
 			imageAlt: "trust formation",
 			description: [
 				"At Mumbi Trust Administrators, we offer comprehensive Trust Formation Services to help individuals, families, and organizations establish a solid foundation for managing their assets and protecting their legacies. Our experienced team of professionals understands the intricacies involved in trust creation and works closely with clients to develop tailored solutions that meet their unique needs and goals.",
@@ -26,7 +26,7 @@ export default function handler(req, res) {
 			id: "s2",
 			title: "Trust Administration",
 			link: "/services/s2",
-			image: "/media/images/Trust-administration.jpg",
+			image: "/media/images/Trust-administration.webp",
 			imageAlt: "Trust Administration",
 			description: [
 				"Trust administration is a vital service that assists individuals, families, and organizations in effectively managing their trust structures. It involves the comprehensive management and oversight of trusts, ensuring that the wishes and objectives of the trust's creator (also known as the settlor) are carried out accurately and efficiently.",
@@ -51,7 +51,7 @@ export default function handler(req, res) {
 			id: "s3",
 			title: "Trust Financials",
 			link: "/services/s3",
-			image: "/media/images/Trust-Financials.jpg",
+			image: "/media/images/Trust-Financials.webp",
 			imageAlt: "Trust Financials",
 			description: [
 				"At Mumbi Trust Administrators, we understand that effective trust administration goes hand in hand with sound financial management. We offer a comprehensive range of financial services designed specifically for trusts, enabling you to optimize the financial performance of your trust assets while ensuring compliance with regulatory requirements.",
@@ -72,7 +72,7 @@ export default function handler(req, res) {
 			id: "s4",
 			title: "Independent Trusteeship",
 			link: "/services/s4",
-			image: "/media/images/independant-trusteeship.jpg",
+			image: "/media/images/independant-trusteeship.webp",
 			imageAlt: "Independent Trusteeship",
 			description: [
 				"Our Independent Trusteeship Service offers a comprehensive and reliable solution for individuals, families, and organizations seeking a trustworthy and impartial trustee to oversee their trusts. As an independent trustee, we assume the fiduciary responsibility to administer and manage your trust, ensuring that it operates in accordance with your wishes and best interests.",
@@ -94,7 +94,7 @@ export default function handler(req, res) {
 			id: "s5",
 			title: "Risk Management",
 			link: "/services/s5",
-			image: "/media/images/risk-management.jpg",
+			image: "/media/images/risk-management.webp",
 			imageAlt: "Risk Management",
 			description: [
 				"Risk Management as a Service (RMaaS) is a comprehensive and tailored solution offered by Mumbi Trust Administrators to help businesses identify, assess, and mitigate risks in today's complex and ever-changing business landscape. Our team of experienced risk management professionals works closely with organizations of all sizes and industries, providing expert guidance and support to safeguard their operations and assets.",
@@ -116,7 +116,7 @@ export default function handler(req, res) {
 			id: "s6",
 			title: "Income Tax Returns",
 			link: "/services/s6",
-			image: "/media/images/income-tax-returns.jpg",
+			image: "/media/images/income-tax-returns.webp",
 			imageAlt: "Income Tax Returns",
 			description: [
 				"At Mumbi Trust Administrators, we offer comprehensive and reliable solutions to help individuals and businesses effectively navigate the complex world of income tax filing. We understand that tax compliance can be overwhelming and time-consuming, which is why we are here to simplify the process and ensure that you meet all your tax obligations while maximizing your tax benefits.",
@@ -139,7 +139,7 @@ export default function handler(req, res) {
 		// 	id: "s7",
 		// 	title: "Bond Originating",
 		// 	link: "/services/s7",
-		// 	image: "/media/images/bond-originating.jpg",
+		// 	image: "/media/images/bond-originating.webp",
 		// 	imageAlt: "alt description",
 		// 	description: [
 		// 		'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -159,7 +159,7 @@ export default function handler(req, res) {
 			id: "s8",
 			title: "Association With Attorneys",
 			link: "/services/s8",
-			image: "/media/images/association-with-attorneys.jpg",
+			image: "/media/images/association-with-attorneys.webp",
 			imageAlt: "Association With Attorneys",
 			description: [
 				"At Mumbi Trust Administrators, we understand the critical role that legal expertise plays in the success of your business or personal matters. We offer a unique service that connects you with highly skilled attorneys who are dedicated to providing exceptional legal support tailored to your specific needs."
@@ -180,7 +180,7 @@ export default function handler(req, res) {
 		// 	id: "s9",
 		// 	title: "Life Cover",
 		// 	link: "/services/s9",
-		// 	image: "/media/images/life-cover.jpg",
+		// 	image: "/media/images/life-cover.webp",
 		// 	imageAlt: "Life Cover",
 		// 	description: [
 		// 		'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -200,7 +200,7 @@ export default function handler(req, res) {
 		// 	id: "s10",
 		// 	title: "Events",
 		// 	link: "/services/s10",
-		// 	image: "/media/images/events.jpg",
+		// 	image: "/media/images/events.webp",
 		// 	imageAlt: "Events",
 		// 	description: [
 		// 		'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',

@@ -14,7 +14,7 @@ const SiteFooter = () => {
 				<div className="w-52 mb-12 md:mb-5 md:w-64 xl:w-96 mr-auto ml-auto">
 					<Footer.Brand
 						href="/"
-						src="/media/images/MTA_Logo.png"
+						src="/media/images/MTA_Logo.webp"
 						alt="MTA Logo"
 						theme={imageTheme}
 					/>
