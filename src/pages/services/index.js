@@ -2,10 +2,14 @@ import Link from "next/link";
 import Heading from "@/components/UI/Heading";
 import { Card } from "flowbite-react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import classes from "@/styles/Services.module.css"
 
 const Services = () => {
 	const [mappedServices, setMappedServices] = useState();
+	const { asPath } = useRouter();
 
+	
 	const imgTheme = {
 		img: { base: "lg:h-52 lg:object-cover" },
 	};
@@ -17,18 +21,25 @@ const Services = () => {
 		const data = await response.json();
 		setMappedServices(
 			data.map((service) => {
-				return (
-					<Link href={service.link} target="_blank" key={service.id}>
-						<Card imgAlt={service.imageAlt} imgSrc={service.image} className="" theme={imgTheme}>
-							<h5 className="text-1xl font-bold tracking-tight text-lime-800 dark:text-white">
-								{service.title}
-							</h5>
-							<p className="font-normal text-gray-700 dark:text-gray-400">
-								{service.description}
-							</p>
-						</Card>
-					</Link>
-				);
+				if (!asPath.includes(service.id)) {
+					return (
+						<Link href={service.link} key={service.id}>
+							<Card
+								imgAlt={service.imageAlt}
+								imgSrc={service.image}
+								className="lg:max-h-96  "
+								theme={imgTheme}
+							>
+								<h5 className="text-1xl  font-bold tracking-tight text-lime-800 dark:text-white">
+									{service.title}
+								</h5>
+								<p className={`${classes.cardDescription}  font-normal text-gray-700 dark:text-gray-400 `}>
+									{service.description}
+								</p>
+							</Card>
+						</Link>
+					);
+				}
 			})
 		);
 	};

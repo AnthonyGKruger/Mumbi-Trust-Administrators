@@ -19,9 +19,9 @@ const Home = () => {
 			</Head>{" "}
 			<main className={` ${inter.className}`}>
 				<CallToAction />
-				<Services />
 				<About />
 				<Map />
+				<Services />
 				<MoreOnTrusts />
 				<ContactUs />
 			</main>

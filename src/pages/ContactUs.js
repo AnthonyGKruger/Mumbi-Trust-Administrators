@@ -12,8 +12,11 @@ import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import classes from "@/styles/ContactMe.module.css";
+import { useRouter } from "next/router";
+import Services from "./services";
 
 const ContactUs = () => {
+	const { asPath } = useRouter();
 	const [formState, setFormState] = useState({
 		isSending: false,
 		name: "",
@@ -140,11 +143,11 @@ const ContactUs = () => {
 	};
 
 	const checkBoxTheme = {
-		root:{
+		root: {
 			// base: `ring-amber-400 bg-lime-400 accent-lime-200 rounded`
-			base: "h-4 w-4 rounded border border-gray-300 bg-gray-100 focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-amber-600 focus:ring-amber-400 selection:bg-lime-400 accent-lime-200"
-		}
-	}
+			base: "h-4 w-4 rounded border border-gray-300 bg-gray-100 focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-amber-600 focus:ring-amber-400 selection:bg-lime-400 accent-lime-200",
+		},
+	};
 
 	return (
 		<>
@@ -295,6 +298,7 @@ const ContactUs = () => {
 					)}
 				</form>
 			</div>
+			{asPath !== "/" && <Services/>}
 		</>
 	);
 };
