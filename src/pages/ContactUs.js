@@ -22,6 +22,7 @@ const ContactUs = () => {
 		name: "",
 		email: "",
 		message: "",
+		agreedTo: false,
 		nameHasError: false,
 		emailHasError: false,
 		messageHasError: false,
@@ -50,7 +51,7 @@ const ContactUs = () => {
 	};
 
 	const validateString = (str) => {
-		let regex = /^[a-zA-Z0-9,''""!?&@\s]+$/;
+		let regex = /^[a-zA-Z0-9,.''""!?&@\s]+$/;
 		return regex.test(str);
 	};
 
@@ -68,7 +69,7 @@ const ContactUs = () => {
 			if (validateEmail(event.target.value)) {
 				setState({ email: event.target.value });
 			} else {
-				setState({ emailHasError: true });
+				setState({ email: event.target.value, emailHasError: true });
 			}
 		} else if (event.target.name === "message") {
 			setState({ messageHasError: false, formHasError: false });
@@ -77,7 +78,10 @@ const ContactUs = () => {
 			} else {
 				setState({ messageHasError: true });
 			}
+		} else if (event.target.name === "agreedTo") {
+			setState({ agreedTo: !formState.agreedTo });
 		}
+		console.log(formState);
 	};
 
 	const onSubmitHandler = (event) => {
@@ -101,7 +105,14 @@ const ContactUs = () => {
 				.then(
 					(result) => {
 						console.log(result.text);
-						setState({ emailSent: true, isSending: false });
+						setState({
+							name: "",
+							email: "",
+							message: "",
+							agreedTo: false,
+							emailSent: true,
+							isSending: false,
+						});
 					},
 					(error) => {
 						console.log(error.text);
@@ -221,7 +232,7 @@ const ContactUs = () => {
 								formState.nameHasError ? errorTextInputTheme : textInputTheme
 							}
 							onChange={changeHandler}
-							// value={formState.name}
+							value={formState.name}
 						/>
 					</div>
 
@@ -239,7 +250,7 @@ const ContactUs = () => {
 								formState.emailHasError ? errorTextInputTheme : textInputTheme
 							}
 							onChange={changeHandler}
-							// value={formState.email}
+							value={formState.email}
 						/>
 					</div>
 
@@ -259,13 +270,16 @@ const ContactUs = () => {
 							formState.messageHasError ? errorInputClasses : inputClasses
 						}
 						onChange={changeHandler}
-						// value={formState.message}
+						value={formState.message}
 					/>
 
 					<div className="flex items-center gap-2">
 						<Checkbox
 							id="agree"
+							name="agreedTo"
 							required
+							checked={formState.agreedTo}
+							onChange={changeHandler}
 							// className={`focus:ring-amber-400 selection:bg-lime-400 accent-lime-200`}
 							theme={checkBoxTheme}
 						/>
@@ -298,7 +312,7 @@ const ContactUs = () => {
 					)}
 				</form>
 			</div>
-			{asPath !== "/" && <Services/>}
+			{asPath !== "/" && <Services />}
 		</>
 	);
 };

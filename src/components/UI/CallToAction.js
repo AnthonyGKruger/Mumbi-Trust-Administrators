@@ -21,7 +21,7 @@ const CallToAction = () => {
 			
 			<div className={bannerClasses}>
 				<p className={companySloganClasses}>Build a Legacy. Touch Freedom</p>
-				<button className={buttonClasses}><Link href="/Services">View Our Services</Link></button>
+				<button className={buttonClasses}><Link href="/services">View Our Services</Link></button>
 			</div>
 
 			<Carousel>
@@ -30,7 +30,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Property"
-					unoptimized
+					// unoptimized
 					priority
 				/>
 
@@ -39,7 +39,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Family"
-					unoptimized
+					// unoptimized
 					priority
 				/>
 
@@ -48,7 +48,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Cars"
-					unoptimized
+					// unoptimized
 					priority
 				/>
 
@@ -57,7 +57,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="financial wellness"
-					unoptimized
+					// unoptimized
 					priority
 				/>
 			</Carousel>

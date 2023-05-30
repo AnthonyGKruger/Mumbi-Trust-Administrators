@@ -5,7 +5,7 @@ const imageTheme = {
 	img: "md:h-22 lg:h-22 xl:h-22 mt-2 ml-auto mr-auto",
 };
 
-const linkClasses = `hover:text-lime-600 transition-all ease-in-out delay-75`;
+const linkClasses = `hover:text-lime-600 transition-all ease-in-out delay-75 text-gray-500 text-sm`;
 
 const SiteFooter = () => {
 	return (
@@ -83,9 +83,18 @@ const SiteFooter = () => {
 						by="Mumbi Trust Administrators"
 						year={new Date().getFullYear()}
 					/>
-					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+					{/* <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
 						<Footer.Icon href="#" icon={BsFacebook} />
 						<Footer.Icon href="#" icon={BsLinkedin} />
+					</div> */}
+					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+						<a
+							href="https://ezdev.solutions"
+							target="_blank"
+							className={linkClasses}
+						>
+							Developed by EZdev Solutions
+						</a>
 					</div>
 				</div>
 			</div>
