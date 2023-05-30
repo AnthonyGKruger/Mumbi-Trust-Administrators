@@ -30,7 +30,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Property"
-					// unoptimized
+					unoptimized
 					priority
 				/>
 
@@ -39,7 +39,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Family"
-					// unoptimized
+					unoptimized
 					priority
 				/>
 
@@ -48,7 +48,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="Cars"
-					// unoptimized
+					unoptimized
 					priority
 				/>
 
@@ -57,7 +57,7 @@ const CallToAction = () => {
 					width={100}
 					height={100}
 					alt="financial wellness"
-					// unoptimized
+					unoptimized
 					priority
 				/>
 			</Carousel>
@@ -66,3 +66,4 @@ const CallToAction = () => {
 };
 
 export default CallToAction;
+
