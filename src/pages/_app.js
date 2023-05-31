@@ -12,20 +12,13 @@ const App = ({ Component, pageProps }) => {
 
 	return (
 		<>
-			<Head>
-				<title>MTA</title>
-				<meta name="description" content="MTA" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1, maximum-scale=1"
-				/>
-				<Script
-					strategy="lazyOnload"
-					src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-				/>
+			<Script
+				strategy="lazyOnload"
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+			/>
 
-				<Script strategy="lazyOnload">
-					{`
+			<Script strategy="lazyOnload">
+				{`
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
 					gtag('js', new Date());
@@ -33,7 +26,14 @@ const App = ({ Component, pageProps }) => {
 					page_path: window.location.pathname,
 					});
 			`}
-				</Script>
+			</Script>
+			<Head>
+				<title>MTA</title>
+				<meta name="description" content="MTA" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, maximum-scale=1"
+				/>
 			</Head>
 			<Navigation />
 			<Component {...pageProps} />
