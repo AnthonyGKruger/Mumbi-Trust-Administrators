@@ -162,6 +162,7 @@ const ContactUs = () => {
 
 	return (
 		<>
+			
 			<div className="float-right w-96 sticky top-3 right-5 z-40">
 				<div className="flex absolute flex-col gap-4 items-end max-w-full">
 					{formState.emailHasError && (

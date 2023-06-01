@@ -8,6 +8,7 @@ const About = () => {
 	const imgTheme = { img: { base: "w-96 mx-auto" } };
 	return (
 		<>
+		
 			<Heading content="About Us" />
 			<div className={` mx-7 mt-10 sm:mt-16 xl:mx-72  md:mx-16`}>
 				{/* <div className={` mx-7 mt-10 sm:mt-16 xl:mx-72 lg:mx-52 md:mx-16`}> */}

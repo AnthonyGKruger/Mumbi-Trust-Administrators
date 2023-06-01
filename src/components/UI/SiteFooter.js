@@ -83,10 +83,14 @@ const SiteFooter = () => {
 						by="Mumbi Trust Administrators"
 						year={new Date().getFullYear()}
 					/>
-					{/* <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-						<Footer.Icon href="#" icon={BsFacebook} />
-						<Footer.Icon href="#" icon={BsLinkedin} />
-					</div> */}
+					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+					<a
+							href="/PrivacyPolicy"
+							className={linkClasses}
+						>
+							Privacy Policy
+						</a>
+					</div>
 					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
 						<a
 							href="https://ezdev.solutions"

@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Error from "../404";
 import Services from "/";
+import Head from "next/head";
 
 const Product = () => {
 	const router = useRouter();
+	const {asPath} = useRouter();
 	const serviceId = router.query.serviceId;
 	const [service, setService] = useState();
 
@@ -34,6 +36,7 @@ const Product = () => {
 		if (service.error) {
 			serviceElement = <Error />;
 		} else {
+			
 			serviceElement = (
 				<div className="bg-white">
 					<div className="pt-6">

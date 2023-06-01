@@ -16,7 +16,7 @@ const Navigation = () => {
 				/>
 			</Navbar.Brand>
 			<Navbar.Toggle />
-			<Navbar.Collapse >
+			<Navbar.Collapse > 
 				<Navbar.Link
 					className={linkClasses}
 					href="/"
@@ -33,9 +33,9 @@ const Navigation = () => {
 				<Navbar.Link className={linkClasses} href="/ContactUs">
 					Contact Us
 				</Navbar.Link>
-				<Navbar.Link className={linkClasses} href="/PrivacyPolicy">
+				{/* <Navbar.Link className={linkClasses} href="/PrivacyPolicy">
 					Privacy Policy
-				</Navbar.Link>
+				</Navbar.Link> */}
 			</Navbar.Collapse>
 		</Navbar>
 	);
