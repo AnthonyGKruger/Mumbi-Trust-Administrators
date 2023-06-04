@@ -213,7 +213,8 @@ const ContactUs = () => {
 			</div>
 
 			<Heading content="Contact Us" />
-			<div className="mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16">
+			<div className="mx-5 my-14 xl:mx-96  md:mx-16">
+			{/* <div className="mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16"> */}
 				<form
 					ref={formRef}
 					className="flex flex-col gap-4"

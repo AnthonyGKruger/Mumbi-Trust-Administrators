@@ -5,7 +5,8 @@ const MoreOnTrusts = () => {
 	return (
 		<>
 			<Heading content="More On Trusts:" />
-			<div className={`mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16`}>
+			<div className={`mx-5 my-14 xl:mx-96  md:mx-16`}>
+			{/* <div className={`mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16`}> */}
 				<Accordion>
 					<Accordion.Panel>
 						<Accordion.Title>Why Have A Trust?</Accordion.Title>
