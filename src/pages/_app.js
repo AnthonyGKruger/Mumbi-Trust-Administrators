@@ -52,7 +52,26 @@ const App = ({ Component, pageProps }) => {
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1"
 				/>
+
+				<link rel="icon" href="/media/images/MTA_logo.webp" />
 				<link rel="shortcut icon" href="/media/images/MTA_logo.webp" />
+				<link
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href="/images/apple-touch-icon.png"
+				/>
+				<link
+					rel="icon"
+					type="image/jpg"
+					sizes="32x32"
+					href="/media/images/MTA_logo.webp"
+				/>
+				<link
+					rel="icon"
+					type="image/jpg"
+					sizes="16x16"
+					href="/media/images/MTA_logo.webp"
+				/>
 			</Head>
 			<Navigation />
 			<Component {...pageProps} />
