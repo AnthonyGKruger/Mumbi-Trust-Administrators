@@ -7,6 +7,7 @@ import Script from "next/script";
 // import Services from "./services";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Modal from "@/components/UI/Modal";
 
 const App = ({ Component, pageProps }) => {
 	const { asPath } = useRouter();
@@ -77,6 +78,7 @@ const App = ({ Component, pageProps }) => {
 			<Component {...pageProps} />
 			{/* {asPath !== "/" || asPath !== "/services"   && <Services/>} */}
 			<Footer />
+			<Modal/>
 			<Analytics />
 		</>
 	);
