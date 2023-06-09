@@ -137,7 +137,7 @@ const Modal = ({ showing }) => {
 					<p>
 						This website uses cookies to ensure you get the best experience on
 						our website. By continuing to browse the site, you agree to our use
-						of cookies. For more information, have a look at our privacy policy{" "}
+						of cookies. For more information, have a look at our{" "}
 						<a
 							href="/PrivacyPolicy"
 							target="_blank"
