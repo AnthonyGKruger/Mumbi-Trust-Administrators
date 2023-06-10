@@ -16,7 +16,7 @@ const CallToAction = () => {
 	const companySloganClasses = `text-amber-500 my-2 xl:text-4xl text-2xl`;
 	const buttonClasses = `text-lime-400 border-2 rounded border-lime-400 p-1.5 my-2 hover:text-2xl duration-500 ease-in-out`;
 
-	return (
+	return ( 
 		<div className={containerClasses}>
 			
 			<div className={bannerClasses}>
