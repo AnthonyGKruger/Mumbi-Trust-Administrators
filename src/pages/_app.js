@@ -54,24 +54,24 @@ const App = ({ Component, pageProps }) => {
 					content="width=device-width, initial-scale=1, maximum-scale=1"
 				/>
 
-				<link rel="icon" href="/media/images/MTA_Logo.png" />
-				<link rel="shortcut icon" href="/media/images/MTA_Logo.png" />
+				<link rel="icon" href="/media/images/favicon.png" />
+				<link rel="shortcut icon" href="/media/images/favicon.png" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
-					href="/media/images/MTA_Logo.png"
+					href="/media/images/favicon.png"
 				/>
 				<link
 					rel="icon"
 					type="image/jpg"
 					sizes="32x32"
-					href="/media/images/MTA_Logo.png"
+					href="/media/images/favicon.png"
 				/>
 				<link
 					rel="icon"
 					type="image/jpg"
 					sizes="16x16"
-					href="/media/images/MTA_Logo.png"
+					href="/media/images/favicon.png"
 				/>
 			</Head>
 			<Navigation />
