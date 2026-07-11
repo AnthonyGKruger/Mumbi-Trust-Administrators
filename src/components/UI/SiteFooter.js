@@ -1,108 +1,89 @@
-import { Footer } from "flowbite-react";
-import { BsFacebook, BsLinkedin } from "react-icons/bs";
-
-const imageTheme = {
-	img: "md:h-22 lg:h-22 xl:h-22 mt-2 ml-auto mr-auto",
-};
-
-const linkClasses = `hover:text-lime-600 transition-all ease-in-out delay-75 text-gray-500 text-sm`;
+import Image from "next/image";
+import Link from "next/link";
 
 const SiteFooter = () => {
 	return (
-		<Footer container={true} className="border-t-2 shadow mt-10">
-			<div className="w-full">
-				<div className="w-52 mb-12 md:mb-5 md:w-64 xl:w-96 mr-auto ml-auto">
-					<Footer.Brand
-						href="/"
-						src="/media/images/MTA_Logo.webp"
-						alt="MTA Logo"
-						theme={imageTheme}
-					/>
-				</div>
-				<div className="grid w-full sm:flex sm:justify-between md:flex md:grid-cols-1">
-					<div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6 w-full text-center">
+		<footer className="bg-brand-green-dark px-6 pb-8 pt-14 text-[#a8b39c]">
+			<div className="mx-auto max-w-[1240px]">
+				<div className="flex flex-wrap justify-between gap-10 border-b border-[#2c3d24] pb-10">
+					<div className="h-fit rounded bg-brand-cream-light px-4 py-3">
+						<Image
+							src="/media/images/MTA_Logo.webp"
+							alt="Mumbi Trust Administrators"
+							width={110}
+							height={40}
+							className="block h-10 w-auto"
+						/>
+					</div>
+
+					<div className="flex flex-wrap gap-16">
 						<div>
-							<Footer.Title title="Office Hours" />
-							<Footer.LinkGroup col={true}>
-								<Footer.Link
-									className={linkClasses}
-									href="https://goo.gl/maps/XVKNaVvEYhYGwBQM6"
-									target="_blank"
-								>
-									Monday - Friday
-								</Footer.Link>
-								<Footer.Link
-									className={linkClasses}
-									href="https://goo.gl/maps/XVKNaVvEYhYGwBQM6"
-									target="_blank"
-								>
-									08:00AM - 16:00PM
-								</Footer.Link>
-							</Footer.LinkGroup>
+							<div className="mb-3.5 text-[13px] font-bold tracking-[0.08em] text-brand-gold">
+								OFFICE HOURS
+							</div>
+							<div className="text-sm leading-loose">
+								Monday &ndash; Friday
+								<br />
+								08:00 &ndash; 16:00
+							</div>
 						</div>
 						<div>
-							<Footer.Title title="Contact Details" />
-							<Footer.LinkGroup col={true}>
-								<Footer.Link className={linkClasses} href="tel:+27814868538">
-									+27814868538
-								</Footer.Link>
-								<Footer.Link
-									className={linkClasses}
+							<div className="mb-3.5 text-[13px] font-bold tracking-[0.08em] text-brand-gold">
+								CONTACT
+							</div>
+							<div className="text-sm leading-loose">
+								<a href="tel:+27814868538" className="hover:text-brand-gold">
+									+27 81 486 8538
+								</a>
+								<br />
+								<a
 									href="mailto:admin@mumbi.co.za"
+									className="hover:text-brand-gold"
 								>
 									admin@mumbi.co.za
-								</Footer.Link>
-							</Footer.LinkGroup>
+								</a>
+							</div>
 						</div>
 						<div>
-							<Footer.Title title="Address" />
-							<Footer.LinkGroup col={true}>
-								<Footer.Link
+							<div className="mb-3.5 text-[13px] font-bold tracking-[0.08em] text-brand-gold">
+								ADDRESS
+							</div>
+							<div className="text-sm leading-loose">
+								<a
 									href="https://goo.gl/maps/XVKNaVvEYhYGwBQM6"
 									target="_blank"
-									className={linkClasses}
+									rel="noreferrer"
+									className="hover:text-brand-gold"
 								>
 									70 Markotter Street
-								</Footer.Link>
-
-								<Footer.Link
-									href="https://goo.gl/maps/XVKNaVvEYhYGwBQM6"
-									target="_blank"
-									className={linkClasses}
-								>
+									<br />
 									Centurion
-								</Footer.Link>
-							</Footer.LinkGroup>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<Footer.Divider />
-				<div className="w-full sm:flex sm:items-center sm:justify-between">
-					<Footer.Copyright
-						href="#"
-						by="Mumbi Trust Administrators"
-						year={new Date().getFullYear()}
-					/>
-					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-					<a
-							href="/PrivacyPolicy"
-							className={linkClasses}
-						>
+
+				<div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[13px]">
+					<span>
+						&copy; {new Date().getFullYear()} Mumbi Trust Administrators
+					</span>
+					<div className="flex gap-6">
+						<Link href="/PrivacyPolicy" className="text-brand-gold hover:underline">
 							Privacy Policy
-						</a>
-					</div>
-					<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+						</Link>
 						<a
 							href="https://ezdev.solutions"
 							target="_blank"
-							className={linkClasses}
+							rel="noreferrer"
+							className="hover:text-brand-gold"
 						>
 							Developed by EZdev Solutions
 						</a>
 					</div>
 				</div>
 			</div>
-		</Footer>
+		</footer>
 	);
 };
 

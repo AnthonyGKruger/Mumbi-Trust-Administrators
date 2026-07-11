@@ -1,321 +1,192 @@
-import Heading from "@/components/UI/Heading";
-import {
-	Checkbox,
-	TextInput,
-	Label,
-	Button,
-	Textarea,
-	Spinner,
-	Toast,
-} from "flowbite-react";
-import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import classes from "@/styles/ContactMe.module.css";
-import { useRouter } from "next/router";
-import Services from "./services";
+import Link from "next/link";
+import PageHero from "@/components/UI/PageHero";
+
+const validateEmail = (email) => {
+	const re =
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(email).toLowerCase());
+};
+
+const inputClasses =
+	"w-full box-border rounded-[3px] border border-[#d8d2be] px-3.5 py-3 text-[15px] outline-none focus:border-brand-gold";
 
 const ContactUs = () => {
-	const { asPath } = useRouter();
-	const [formState, setFormState] = useState({
-		isSending: false,
-		name: "",
-		email: "",
-		message: "",
-		agreedTo: false,
-		nameHasError: false,
-		emailHasError: false,
-		messageHasError: false,
-		formHasError: false,
-		emailSent: false,
-		emailError: false,
-	});
-
+	const [form, setForm] = useState({ name: "", email: "", message: "", agreed: false });
+	const [status, setStatus] = useState({ sending: false, sent: false, error: false, emailInvalid: false });
 	const formRef = useRef();
 
-	const setState = (stateValue) => {
-		setFormState((prevState) => {
-			return { ...prevState, ...stateValue };
-		});
-	};
-
-	const validateEmail = (email) => {
-		const re =
-			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(String(email).toLowerCase());
-	};
-
-	const validateName = (str) => {
-		const nameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/;
-		return nameRegex.test(str);
-	};
-
-	const validateString = (str) => {
-		let regex = /^[a-zA-Z0-9,.''""!?&@\s]+$/;
-		return regex.test(str);
-	};
-
-	const changeHandler = (event) => {
-		setState({ emailSent: false });
-		if (event.target.name === "name") {
-			setState({ nameHasError: false, formHasError: false });
-			if (validateName(event.target.value)) {
-				setState({ name: event.target.value });
-			} else {
-				setState({ nameHasError: true });
-			}
-		} else if (event.target.name === "email") {
-			setState({ emailHasError: false, formHasError: false });
-			if (validateEmail(event.target.value)) {
-				setState({ email: event.target.value });
-			} else {
-				setState({ email: event.target.value, emailHasError: true });
-			}
-		} else if (event.target.name === "message") {
-			setState({ messageHasError: false, formHasError: false });
-			if (validateString(event.target.value)) {
-				setState({ message: event.target.value });
-			} else {
-				setState({ messageHasError: true });
-			}
-		} else if (event.target.name === "agreedTo") {
-			setState({ agreedTo: !formState.agreedTo });
-		}
-		console.log(formState);
-	};
-
-	const onSubmitHandler = (event) => {
+	const onSubmit = (event) => {
 		event.preventDefault();
 
-		if (
-			formState.nameHasError ||
-			formState.emailHasError ||
-			formState.messageHasError
-		) {
-			setState({ formHasError: true });
-		} else {
-			setState({ emailError: false, isSending: true });
-			emailjs
-				.sendForm(
-					"mumbi_smtp_service",
-					"mumbi_contact_me",
-					formRef.current,
-					process.env.NEXT_PUBLIC_EMAIL_JS_SECURE_TOKEN
-				)
-				.then(
-					(result) => {
-						console.log(result.text);
-						setState({
-							name: "",
-							email: "",
-							message: "",
-							agreedTo: false,
-							emailSent: true,
-							isSending: false,
-						});
-					},
-					(error) => {
-						console.log(error.text);
-						setState({ emailError: true, isSending: false });
-					}
-				);
+		if (!validateEmail(form.email)) {
+			setStatus((s) => ({ ...s, emailInvalid: true, sent: false }));
+			return;
 		}
-	};
 
-	const inputClasses = `${classes.input} focus:ring-lime-400 focus-within:bg-amber-50 focus-visible:border-transparent focus:outline-lime-400`;
-	const errorInputClasses = `${classes.input} focus:ring-red-400 focus-within:bg-red-50 focus-visible:border-transparent focus:outline-red-400`;
+		setStatus({ sending: true, sent: false, error: false, emailInvalid: false });
 
-	const textInputTheme = {
-		field: {
-			input: {
-				base: "focus:border-lime-400 focus:ring-lime-400 focus-within:bg-amber-50 rounded-lg shadow-sm p-2.5 text-sm outline-transparent block w-full border",
-			},
-		},
-	};
-
-	const errorTextInputTheme = {
-		field: {
-			input: {
-				base: "border-red-400 focus:border-red-400 focus:ring-red-400 bg-red-50 rounded-lg shadow-sm p-2.5 text-sm outline-transparent block w-full border",
-			},
-		},
-	};
-
-	const errorToastTheme = {
-		root: {
-			base: "flex float-right w-full max-w-sm items-center rounded-lg bg-white border-2 border-red-400 p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400 duration-300",
-		},
-	};
-
-	const toastTheme = {
-		root: {
-			base: "flex float-right w-full max-w-sm items-center rounded-lg bg-white border-2 border-lime-400 p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400 duration-300",
-		},
-	};
-
-	const checkBoxTheme = {
-		root: {
-			// base: `ring-amber-400 bg-lime-400 accent-lime-200 rounded`
-			base: "h-4 w-4 rounded border border-gray-300 bg-gray-100 focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-amber-600 focus:ring-amber-400 selection:bg-lime-400 accent-lime-200",
-		},
+		emailjs
+			.sendForm(
+				"mumbi_smtp_service",
+				"mumbi_contact_me",
+				formRef.current,
+				process.env.NEXT_PUBLIC_EMAIL_JS_SECURE_TOKEN
+			)
+			.then(
+				() => {
+					setForm({ name: "", email: "", message: "", agreed: false });
+					setStatus({ sending: false, sent: true, error: false, emailInvalid: false });
+				},
+				() => {
+					setStatus({ sending: false, sent: false, error: true, emailInvalid: false });
+				}
+			);
 	};
 
 	return (
-		<>
-			
-			<div className="float-right w-96 sticky top-3 right-5 z-40">
-				<div className="flex absolute flex-col gap-4 items-end max-w-full">
-					{formState.emailHasError && (
-						<Toast theme={errorToastTheme}>
-							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
-								<HiExclamation className="h-5 w-5" />
-							</div>
-							<div className="ml-3 text-sm font-normal">
-								Please ensure that you have entered a valid email address.
-							</div>
-							<Toast.Toggle />
-						</Toast>
-					)}
-					{formState.nameHasError && (
-						<Toast theme={errorToastTheme}>
-							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
-								<HiExclamation className="h-5 w-5" />
-							</div>
-							<div className="ml-3 text-sm font-normal">
-								Please ensure that you have entered a valid name.
-							</div>
-							<Toast.Toggle />
-						</Toast>
-					)}
-					{formState.formHasError && (
-						<Toast theme={errorToastTheme}>
-							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
-								<HiX className="h-5 w-5" />
-							</div>
-							<div className="ml-3 text-sm font-normal">
-								There is an issue with the values entered on the form!
-							</div>
-							<Toast.Toggle />
-						</Toast>
-					)}
-					{formState.emailSent && (
-						<Toast theme={toastTheme}>
-							<div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-lime-100 text-lime-500 dark:bg-lime-700 dark:text-lime-200">
-								<HiCheck className="h-5 w-5" />
-							</div>
-							<div className="ml-3 text-sm font-normal">
-								Form submitted successfully!
-							</div>
-							<Toast.Toggle />
-						</Toast>
-					)}
-				</div>
-			</div>
+		<main>
+			<PageHero
+				eyebrow="GET IN TOUCH"
+				title="Contact Us"
+				description="Tell us how we can help and we'll be in touch within one business day."
+			/>
 
-			<Heading content="Contact Us" />
-			<div className="mx-5 my-14 xl:mx-96  md:mx-16">
-			{/* <div className="mx-5 my-14 xl:mx-96 lg:mx-52 md:mx-16"> */}
-				<form
-					ref={formRef}
-					className="flex flex-col gap-4"
-					onSubmit={onSubmitHandler}
-				>
+			<div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-16 px-6 py-20 md:grid-cols-2 md:py-24">
+				<form ref={formRef} className="flex flex-col gap-5" onSubmit={onSubmit}>
 					<div>
-						<div className="mb-2 block">
-							<Label htmlFor="name" value="Your name:" />
-						</div>
-						<TextInput
+						<label htmlFor="name" className="mb-2 block text-[13px] font-bold text-brand-green">
+							Your name
+						</label>
+						<input
 							id="name"
 							name="name"
 							type="text"
-							required={true}
-							shadow={true}
-							theme={
-								formState.nameHasError ? errorTextInputTheme : textInputTheme
-							}
-							onChange={changeHandler}
-							value={formState.name}
+							required
+							placeholder="Jane Doe"
+							className={inputClasses}
+							value={form.name}
+							onChange={(e) => setForm({ ...form, name: e.target.value })}
 						/>
 					</div>
 
 					<div>
-						<div className="mb-2 block">
-							<Label htmlFor="email" value="Your email:" />
-						</div>
-						<TextInput
+						<label htmlFor="email" className="mb-2 block text-[13px] font-bold text-brand-green">
+							Your email
+						</label>
+						<input
 							id="email"
 							name="email"
 							type="email"
-							required={true}
-							shadow={true}
-							theme={
-								formState.emailHasError ? errorTextInputTheme : textInputTheme
-							}
-							onChange={changeHandler}
-							value={formState.email}
-						/>
-					</div>
-
-					<div className="mb-2 block">
-						<Label
-							htmlFor="comment"
-							value="Let us know how we can assist you:"
-						/>
-					</div>
-					<Textarea
-						id="message"
-						name="message"
-						placeholder="Leave a comment..."
-						required={true}
-						rows={4}
-						className={
-							formState.messageHasError ? errorInputClasses : inputClasses
-						}
-						onChange={changeHandler}
-						value={formState.message}
-					/>
-
-					<div className="flex items-center gap-2">
-						<Checkbox
-							id="agree"
-							name="agreedTo"
 							required
-							checked={formState.agreedTo}
-							onChange={changeHandler}
-							// className={`focus:ring-amber-400 selection:bg-lime-400 accent-lime-200`}
-							theme={checkBoxTheme}
+							placeholder="jane@example.com"
+							className={inputClasses}
+							value={form.email}
+							onChange={(e) => setForm({ ...form, email: e.target.value, emailInvalid: false })}
 						/>
-						<Label htmlFor="agree">
-							I agree with the{" "}
-							<a
-								href="/PrivacyPolicy"
-								className="text-amber-600 hover:underline dark:text-blue-500"
-							>
-								privacy policy.
-							</a>
-						</Label>
+						{status.emailInvalid && (
+							<p className="mt-2 text-sm text-red-600">
+								Please enter a valid email address.
+							</p>
+						)}
 					</div>
-					{formState.isSending && (
-						<div className="text-center">
-							<Spinner
-								aria-label="Spinner button example"
-								color="warning"
-								size="xl"
-							/>
+
+					<div>
+						<label htmlFor="message" className="mb-2 block text-[13px] font-bold text-brand-green">
+							How can we assist you?
+						</label>
+						<textarea
+							id="message"
+							name="message"
+							required
+							rows={5}
+							placeholder="Tell us a little about your situation..."
+							className={`${inputClasses} resize-y`}
+							value={form.message}
+							onChange={(e) => setForm({ ...form, message: e.target.value })}
+						/>
+					</div>
+
+					<div className="flex items-start gap-2.5">
+						<input
+							id="agree"
+							type="checkbox"
+							required
+							checked={form.agreed}
+							onChange={(e) => setForm({ ...form, agreed: e.target.checked })}
+							className="mt-0.5"
+						/>
+						<label htmlFor="agree" className="text-sm text-[#54604e]">
+							I agree with the{" "}
+							<Link href="/PrivacyPolicy" className="text-brand-green underline">
+								privacy policy
+							</Link>
+							.
+						</label>
+					</div>
+
+					<button
+						type="submit"
+						disabled={status.sending}
+						className="bg-brand-green py-4 text-[15px] font-bold text-brand-cream hover:bg-brand-green-dark transition-colors disabled:opacity-60"
+					>
+						{status.sending ? "Sending..." : "Send Message"}
+					</button>
+
+					{status.sent && (
+						<div className="rounded-[3px] border border-[#b7cf9c] bg-[#f0f6ea] px-4 py-3.5 text-sm text-[#3a5a2f]">
+							Thanks — your message has been sent. We&apos;ll be in touch
+							shortly.
 						</div>
 					)}
-					{!formState.isSending && (
-						<Button
-							className="bg-lime-400 hover:bg-lime-600 text-amber-800 hover:text-amber-400 w-3/5 mx-auto"
-							type="submit"
-						>
-							Send
-						</Button>
+					{status.error && (
+						<div className="rounded-[3px] border border-red-300 bg-red-50 px-4 py-3.5 text-sm text-red-700">
+							Something went wrong sending your message. Please try again or
+							contact us directly.
+						</div>
 					)}
 				</form>
+
+				<div>
+					<div className="mb-5 text-[13px] font-bold tracking-[0.14em] text-brand-gold-dark">
+						OUR OFFICE
+					</div>
+					<div className="mb-8 text-base leading-loose text-[#3a4a35]">
+						70 Markotter Street
+						<br />
+						Centurion
+						<br />
+						<br />
+						<a href="tel:+27814868538" className="font-semibold text-brand-green">
+							+27 81 486 8538
+						</a>
+						<br />
+						<a
+							href="mailto:admin@mumbi.co.za"
+							className="font-semibold text-brand-green"
+						>
+							admin@mumbi.co.za
+						</a>
+						<br />
+						<br />
+						Monday &ndash; Friday, 08:00 &ndash; 16:00
+					</div>
+					<div className="h-72 overflow-hidden rounded border border-brand-line">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.045649652699!2d28.124565999999994!3d-25.9008698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956547e5d61ea9%3A0xc59685658397e7e4!2s70%20Markotter%20St%2C%20The%20Reeds%2C%20Centurion%2C%200061!5e0!3m2!1sen!2sza!4v1684810212658!5m2!1sen!2sza"
+							width="100%"
+							height="100%"
+							style={{ border: 0 }}
+							allowFullScreen
+							loading="lazy"
+							referrerPolicy="no-referrer-when-downgrade"
+							title="Mumbi Trust Administrators office location"
+						/>
+					</div>
+				</div>
 			</div>
-			{asPath !== "/" && <Services />}
-		</>
+		</main>
 	);
 };
 

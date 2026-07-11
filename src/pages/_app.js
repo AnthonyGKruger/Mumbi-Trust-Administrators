@@ -4,31 +4,9 @@ import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "@/components/UI/SiteFooter";
 import Script from "next/script";
-// import Services from "./services";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Modal from "@/components/UI/Modal";
 
 const App = ({ Component, pageProps }) => {
-	const { asPath } = useRouter();
-	const [title, setTitle] = useState("Mumbi Trust Administrators");
-
-	useEffect(() => {
-		if (asPath === "/") {
-			setTitle(`Mumbi Trust Administrators - Home`);
-		} else if (asPath === "/About") {
-			setTitle(`Mumbi Trust Administrators - About`);
-		} else if (asPath === "/services") {
-			setTitle(`Mumbi Trust Administrators - Services`);
-		} else if (asPath === "/404") {
-			setTitle(`Mumbi Trust Administrators - Error`);
-		} else if (asPath === "/ContactUs") {
-			setTitle(`Mumbi Trust Administrators - Contact Us`);
-		} else if (asPath === "PrivacyPolicy") {
-			setTitle(`Mumbi Trust Administrators - Privacy Policy`);
-		}
-	}, []);
-
 	return (
 		<>
 			<Script
@@ -36,7 +14,7 @@ const App = ({ Component, pageProps }) => {
 				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
 			/>
 
-			<Script strategy="lazyOnload">
+			<Script id="ga-init" strategy="lazyOnload">
 				{`
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
@@ -47,13 +25,15 @@ const App = ({ Component, pageProps }) => {
 			`}
 			</Script>
 			<Head>
-				<title>{title}</title>
-				<meta name="description" content="MTA" />
+				<title>Mumbi Trust Administrators</title>
+				<meta
+					name="description"
+					content="Independent trust administration, estate planning and fiduciary services from Mumbi Trust Administrators."
+				/>
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1"
 				/>
-
 				<link rel="icon" href="/media/images/favicon.png" />
 				<link rel="shortcut icon" href="/media/images/favicon.png" />
 				<link
@@ -61,24 +41,11 @@ const App = ({ Component, pageProps }) => {
 					sizes="180x180"
 					href="/media/images/favicon.png"
 				/>
-				<link
-					rel="icon"
-					type="image/jpg"
-					sizes="32x32"
-					href="/media/images/favicon.png"
-				/>
-				<link
-					rel="icon"
-					type="image/jpg"
-					sizes="16x16"
-					href="/media/images/favicon.png"
-				/>
 			</Head>
 			<Navigation />
 			<Component {...pageProps} />
-			{/* {asPath !== "/" || asPath !== "/services"   && <Services/>} */}
 			<Footer />
-			<Modal/>
+			<Modal />
 			<Analytics />
 		</>
 	);

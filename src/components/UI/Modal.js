@@ -1,12 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { hasCookie, setCookie } from "cookies-next";
 
-const Modal = ({ showing }) => {
-	// const [showConsent, setShowConsent] = useState(true);
-
-	const [isShowing, setIsShowing] = useState();
-
-	// console.log(hasCookie("localConsent"), isShowing);
+const Modal = () => {
+	const [isShowing, setIsShowing] = useState(false);
 
 	const acceptCookie = () => {
 		setIsShowing(false);
@@ -14,7 +10,11 @@ const Modal = ({ showing }) => {
 	};
 
 	useEffect(() => {
-		setIsShowing(!hasCookie("localConsent"));
+		// Cookie consent can only be read client-side, after mount.
+		if (!hasCookie("localConsent")) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setIsShowing(true);
+		}
 	}, []);
 
 	const wrapperRef = useRef(null);
@@ -102,12 +102,12 @@ const Modal = ({ showing }) => {
 			>
 				{/*        <!-- Modal header --> */}
 				<header id="header-2a" className="flex items-center gap-4">
-					<h3 className="flex-1 text-xl font-medium text-amber-600">
+					<h3 className="flex-1 text-xl font-semibold text-brand-green">
 						Cookie Notice
 					</h3>
 					<button
 						onClick={() => acceptCookie()}
-						className="inline-flex h-10 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full px-5 text-sm font-medium tracking-wide  text-lime-600 transition duration-300 hover:bg-lime-100 hover:text-lime-600 focus:bg-lime-300 focus:text-lime-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:text-lime-300 disabled:shadow-none disabled:hover:bg-transparent"
+						className="inline-flex h-10 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full px-5 text-sm font-medium tracking-wide text-brand-green transition duration-300 hover:bg-brand-cream-light focus-visible:outline-none"
 						aria-label="close dialog"
 					>
 						<span className="relative only:-mx-5">
@@ -141,7 +141,7 @@ const Modal = ({ showing }) => {
 						<a
 							href="/PrivacyPolicy"
 							target="_blank"
-							className="hover:underline text-amber-600 hover:text-amber-500 transition duration-300"
+							className="hover:underline text-brand-green font-semibold transition duration-300"
 						>
 							privacy policy.
 						</a>
@@ -152,7 +152,7 @@ const Modal = ({ showing }) => {
 					{/*            <!-- base basic button --> */}
 					<button
 						onClick={() => acceptCookie()}
-						className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-amber-400 px-5 text-sm font-medium tracking-wide text-black hover:text-lime-700 transition duration-300 hover:bg-amber-500 focus:bg-amber-600 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-amber-300 disabled:bg-amber-300 disabled:shadow-none"
+						className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-brand-gold px-5 text-sm font-semibold tracking-wide text-brand-green transition duration-300 hover:bg-brand-gold-dark hover:text-white focus-visible:outline-none"
 					>
 						<span>Continue</span>
 					</button>

@@ -1,147 +1,95 @@
-import Heading from "@/components/UI/Heading";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import Error from "../404";
-import Services from "/";
+import Link from "next/link";
 import Head from "next/head";
+import PageHero from "@/components/UI/PageHero";
+import services, { getServiceById } from "@/data/services";
 
-const Product = () => {
-	const router = useRouter();
-	const {asPath} = useRouter();
-	const serviceId = router.query.serviceId;
-	const [service, setService] = useState();
+const ServiceDetail = ({ service }) => {
+	return (
+		<main>
+			<Head>
+				<title>{`Mumbi Trust Administrators - ${service.title}`}</title>
+			</Head>
 
-	const fetchServiceData = async () => {
-		const response = await fetch(`/api/products`, {
-			method: "POST",
-			body: JSON.stringify({ id: serviceId }),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		const data = await response.json();
-		setService(data);
-	};
+			<div className="bg-brand-green px-6 py-16 text-brand-cream sm:py-20">
+				<div className="mx-auto max-w-[1240px]">
+					<Link href="/services" className="text-[13px] font-bold text-brand-gold">
+						&larr; All Services
+					</Link>
+					<h1 className="mt-5 text-3xl font-extrabold sm:text-4xl">
+						{service.title}
+					</h1>
+				</div>
+			</div>
 
-	let serviceElement;
+			<div className="mx-auto max-w-[1240px] px-6 pt-16">
+				<div className="relative h-56 overflow-hidden rounded sm:h-[340px]">
+					<Image
+						src={service.image}
+						alt={service.title}
+						fill
+						priority
+						sizes="100vw"
+						className="object-cover"
+					/>
+				</div>
+			</div>
 
-	useEffect(() => {
-		if (serviceId !== undefined) {
-			fetchServiceData();
-		}
-	}, [serviceId]);
+			<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-14 px-6 py-16 md:grid-cols-[1.4fr_1fr] md:py-24">
+				<div>
+					{service.description.map((p) => (
+						<p key={p} className="mb-5 text-base leading-loose text-[#3a4a35]">
+							{p}
+						</p>
+					))}
 
-	if (service) {
-		if (service.error) {
-			serviceElement = <Error />;
-		} else {
-			
-			serviceElement = (
-				<div className="bg-white">
-					<div className="pt-6">
-						<Heading content={service.title} />
-						{/* Image gallery */}
-						<div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:px-8">
-							<div className="aspect-h-4 aspect-w-6  sm:overflow-hidden sm:rounded-lg">
-								{/* <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg"> */}
-								<Image
-									width={50}
-									height={50}
-									src={service.image}
-									alt={service.imageAlt}
-									className="h-full w-full object-cover object-center"
-									unoptimized
-									priority
-								/>
+					<div className="mt-10">
+						<h3 className="mb-5 text-sm font-bold tracking-[0.1em] text-brand-gold-dark">
+							HIGHLIGHTS
+						</h3>
+						{service.highlights.map((h) => (
+							<div
+								key={h}
+								className="flex gap-3.5 border-t border-brand-line py-3.5 text-[15px] text-[#3a4a35]"
+							>
+								<span className="font-extrabold text-brand-gold">&mdash;</span>
+								{h}
 							</div>
-						</div>
-
-						{/* Product info */}
-						<div className="mx-auto max-w-2xl px-4  pt-10 sm:px-6  lg:max-w-7xl lg:px-8 lg:pt-16">
-							<div className="lg:col-span-2  lg:pr-8">
-								<h1 className="text-2xl font-bold tracking-tight text-lime-700 sm:text-3xl">
-									{service.title}
-								</h1>
-							</div>
-
-							<div className="py-10 lg:col-span-2 lg:col-start-1  lg:pb-16 lg:pr-8 lg:pt-6">
-								{/* Description and details */}
-								<div>
-									<h3 className="sr-only">Description</h3>
-
-									<div className="space-y-6">
-										{service.description.map((paragraph) => (
-											<p
-												key={Math.floor(Math.random() * 100)}
-												className="text-sm text-gray-600"
-											>
-												{paragraph}
-											</p>
-										))}
-									</div>
-								</div>
-
-								<div className="mt-10">
-									<h3 className="text-sm font-medium text-amber-900">
-										{service.highlightTitle}
-									</h3>
-
-									<div className="mt-4">
-										<ul
-											role="list"
-											className="list-disc space-y-2 pl-4 text-sm"
-										>
-											{service.highlights.map((highlight) => (
-												<li
-													key={Math.floor(Math.random() * 100)}
-													className="text-gray-400"
-												>
-													<span className="text-gray-600">{highlight}</span>
-												</li>
-											))}
-										</ul>
-									</div>
-								</div>
-
-								<div className="mt-10">
-									<h2 className="text-sm font-medium text-amber-900">
-										Details:
-									</h2>
-
-									<div className="mt-4 space-y-6">
-										{service.details.map((paragraph) => (
-											<p
-												key={Math.floor(Math.random() * 100)}
-												className="text-sm text-gray-600"
-											>
-												{paragraph}
-											</p>
-										))}
-									</div>
-									<a href="/ContactUs">
-										<button
-											type="button"
-											className="mt-10 flex  items-center justify-center rounded-md border border-transparent bg-lime-500 px-8 py-3 text-base font-medium  hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2  text-amber-900 hover:text-amber-400 hover:border-amber-300 ease-in-out delay-75"
-										>
-											Contact Us
-										</button>
-									</a>
-								</div>
-							</div>
-						</div>
+						))}
 					</div>
 				</div>
-			);
-		}
-	}
 
-	return (
-		<>
-			{service && serviceElement}
-			{service && <Services />}
-		</>
+				<div className="bg-brand-cream-light px-8 py-9 md:sticky md:top-24">
+					<div className="mb-4 text-sm font-bold tracking-[0.1em] text-brand-green">
+						READY TO GET STARTED?
+					</div>
+					<p className="mb-6 text-[14.5px] leading-relaxed text-[#5f6a58]">
+						Speak to our team about how {service.title} can fit into your
+						estate or trust plan.
+					</p>
+					<Link
+						href="/ContactUs"
+						className="block bg-brand-green py-3.5 text-center text-[15px] font-bold text-brand-cream hover:bg-brand-green-dark transition-colors"
+					>
+						Contact Us
+					</Link>
+				</div>
+			</div>
+		</main>
 	);
 };
 
-export default Product;
+export const getStaticPaths = () => ({
+	paths: services.map((s) => ({ params: { serviceId: s.id } })),
+	fallback: false,
+});
+
+export const getStaticProps = ({ params }) => {
+	const service = getServiceById(params.serviceId);
+	if (!service) {
+		return { notFound: true };
+	}
+	return { props: { service } };
+};
+
+export default ServiceDetail;

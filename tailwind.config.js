@@ -1,22 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
-		"./node_modules/flowbite-react/**/*.js",
 		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 		extend: {
-			backgroundImage: {
-				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-				"gradient-conic":
-					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-				gridTemplateRows: {
-					"[auto,auto,1fr]": "auto auto 1fr",
+			fontFamily: {
+				sans: ["'Libre Franklin'", "sans-serif"],
+			},
+			colors: {
+				brand: {
+					green: "#1f3a22",
+					"green-dark": "#16290f",
+					gold: "#d9b467",
+					"gold-dark": "#b8863c",
+					cream: "#f4efe2",
+					"cream-light": "#f6f4ec",
+					line: "#ece7d8",
+					body: "#22301d",
 				},
 			},
 		},
 	},
-	plugins: [require("flowbite/plugin"), require("@tailwindcss/aspect-ratio")],
+	plugins: [],
 };

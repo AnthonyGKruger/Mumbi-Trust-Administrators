@@ -4,7 +4,17 @@ const Document = () => {
 	return (
 		<Html lang="en">
 			<Head>
-				<link rel="shortcut icon" href="/media/images/MTA_logo.webp" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
+				<link
+					href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap"
+					rel="stylesheet"
+				/>
+				<link rel="shortcut icon" href="/media/images/favicon.png" />
 			</Head>
 			<body>
 				<Main />

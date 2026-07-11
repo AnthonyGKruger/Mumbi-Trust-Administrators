@@ -1,60 +1,53 @@
+import Image from "next/image";
 import Link from "next/link";
-import Heading from "@/components/UI/Heading";
-import { Card } from "flowbite-react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import classes from "@/styles/Services.module.css"
+import PageHero from "@/components/UI/PageHero";
+import ContactCta from "@/components/UI/ContactCta";
+import services from "@/data/services";
 
 const Services = () => {
-	const [mappedServices, setMappedServices] = useState();
-	const { asPath } = useRouter();
-
-	
-	const imgTheme = {
-		img: { base: "lg:h-52 lg:object-cover" },
-	};
-
-	const fetchServiceData = async () => {
-		const response = await fetch("/api/products", {
-			method: "POST",
-		});
-		const data = await response.json();
-		setMappedServices(
-			data.map((service) => {
-				if (!asPath.includes(service.id)) {
-					return (
-						<Link href={service.link} key={service.id}>
-							<Card
-								imgAlt={service.imageAlt}
-								imgSrc={service.image}
-								className="lg:max-h-96  "
-								theme={imgTheme}
-							>
-								<h5 className="text-1xl  font-bold tracking-tight text-lime-800 dark:text-white">
-									{service.title}
-								</h5>
-								<p className={`${classes.cardDescription}  font-normal text-gray-700 dark:text-gray-400 `}>
-									{service.description}
-								</p>
-							</Card>
-						</Link>
-					);
-				}
-			})
-		);
-	};
-
-	useEffect(() => {
-		fetchServiceData();
-	}, []);
-
 	return (
-		<>
-			<Heading content="Services" />
-			<div className="mx-7 mt-10 grid  grid-cols-1 gap-x-8 gap-y-16  md:mx-14  sm:mt-16  lg:mx-7 lg:max-w-none lg:grid-cols-3">
-				{mappedServices}
+		<main>
+			<PageHero
+				eyebrow="WHAT WE DO"
+				title="Services"
+				description="Independent, comprehensive trust administration — from formation through to ongoing compliance and reporting."
+			/>
+
+			<div className="mx-auto max-w-[1240px] px-6 py-20 md:py-24">
+				<div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+					{services.map((s) => (
+						<Link
+							key={s.id}
+							href={`/services/${s.id}`}
+							className="block overflow-hidden bg-brand-cream-light hover:shadow-md transition-shadow"
+						>
+							<div className="relative h-[170px] overflow-hidden">
+								<Image
+									src={s.image}
+									alt={s.title}
+									fill
+									sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+									className="object-cover"
+								/>
+							</div>
+							<div className="border-t-[3px] border-brand-gold px-6 py-7">
+								<div className="mb-2.5 text-lg font-bold text-brand-green">
+									{s.title}
+								</div>
+								<div className="text-sm leading-relaxed text-[#6b7362]">
+									{s.cardDescription}
+								</div>
+							</div>
+						</Link>
+					))}
+				</div>
 			</div>
-		</>
+
+			<ContactCta
+				title="Not sure which service you need?"
+				description="Tell us about your situation and we'll recommend the right structure."
+			/>
+		</main>
 	);
 };
 
